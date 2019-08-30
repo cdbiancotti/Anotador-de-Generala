@@ -1,4 +1,4 @@
-$$// Initialize app
+// Initialize app
 var myApp = new Framework7();
   
 // If we need to use custom DOM library, let's save it to $$ variable:
@@ -97,6 +97,7 @@ var indexJugador, indexPicker;
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
+
 })
 
 $$(document).on('page:init', '.page[data-name="inicio"]', function() {
@@ -104,18 +105,18 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function() {
   // USAR FOR AL APRETAR SOBRE EL BORRAR ELEMENTO PARA RENOMBRAR EL LABEL DE CADA JUGADOR
   $$("#addPlayer").on('click', function(){
     $$("ul.page2").append(`<li class="item-content item-input swipeout primeros">
-                        <div class="item-inner swipeout-content">
-                          <div class="item-title item-floating-label">Jugador ${$$(".item-title").length + 1}</div>
-                          <div class="item-input-wrap">
-                            <input type="text" placeholder="Nombre" required validate pattern="[a-zA-Z]*">
-                            <span class="input-clear-button"></span>
-                          </div>
-                        </div>
-                        <div class="swipeout-actions-right">
-                          <a href="#" class="swipeout-delete">Borrar</a>
-                        </div>
-                      </li>`);
-    });
+                              <div class="item-inner swipeout-content">
+                                <div class="item-title item-floating-label">Jugador ${$$(".item-title").length + 1}</div>
+                                <div class="item-input-wrap">
+                                  <input type="text" placeholder="Nombre" required validate pattern="[a-zA-Z]*">
+                                  <span class="input-clear-button"></span>
+                                </div>
+                              </div>
+                              <div class="swipeout-actions-right">
+                                <a href="#" class="swipeout-delete">Borrar</a>
+                              </div>
+                            </li>`);
+  });
   
 
 
@@ -193,8 +194,7 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
             totalesGral[indexJugador] = totales[indexJugador].reduce((a, b) => a + b);
             $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
             $$('div>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
-
-            }
+          }
         }
       });
     };
@@ -208,7 +208,7 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
         juegosArmados[2] = 'WIN';
       }else if(j == 5){
         juegosArmados.splice(2,1);
-      }
+      };
       var pickerDevice1 = app.picker.create({
         inputEl: `.juegos${jug + j}`,
         toolbarCloseText: 'Confirmar',
@@ -224,7 +224,7 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
             $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
             $$('div>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
 
-            }
+          }
         }
       });
       unserve += 10;
@@ -250,7 +250,7 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   $$('.popup-close').on('click', function () {
     $$('.rellenarPuntajes').html('');
   });
-  // totalesGral.indexOf(totalesGral.reduce(function(a, b){parseInt(a)>parseInt(b)?c=a:c=b; return c}))
+  
 
   $$('.open-confirm').on('click', function () {
       var algunIndex = totalesGral.indexOf(Math.max(...totalesGral));
