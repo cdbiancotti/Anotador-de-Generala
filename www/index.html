@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#000000">
+    <!-- Your app title -->
+    <title>Generala</title>
+    <!-- Path to Framework7 Library CSS -->
+    <link rel="stylesheet" href="lib/framework7/css/framework7.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Statusbar overlay -->
+        <div class="statusbar"></div>
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="index" class="page">
+                <!-- Scrollable page content -->             
+                    <div class="page-content bg">
+                        <div class="h100">
+                            <div class="h33 col-80">
+                                <img src="gen.png" alt="Generala" class="ge"></img>
+                             </div>
+                            <div class="row h33">
+                                <a href="/inicio/" data-view=".page-content" class="btn col-80 button button-fill button-round color-black auto">Iniciar Anotador</a>
+                            </div>    
+                            <div class="row h33">
+                                <button class="col-40 button button-fill button-round btn color-black auto popup-open" data-popup=".popup-rules">Reglamento</button>
+                                <button class="btn col-40 button button-fill button-round color-black auto popup-open" data-popup=".popup-instruct">Instructivo</button>
+                            </div>            
+                            
+                        </div> 
+
+                        <div class="popup popup-rules">
+                            <div class="page-content hide-navbar-on-scrol">
+                <!-- Top Navbar -->
+                <div class="navbar color-black">
+                        <div class="navbar-inner sliding">
+                          <div class="left">
+                            <a class="link back popup-close" href="#">
+                              <i class="icon icon-back"></i>
+                            </a>
+                          </div>
+                          <div class="title">Puntajes</div>
+                        </div>
+                      </div>
+
+
+                                        <div class="row">
+                                            <div>                                            
+                                            <ul class="col-70 auto">
+                                                <li>1: se coloca el número que dé la suma de 1 obtenidos.</li>
+                                                <li>2: se coloca el número que dé la suma de 2 obtenidos.</li>
+                                                <li>3: se coloca el número que dé la suma de 3 obtenidos.</li>
+                                                <li>4: se coloca el número que dé la suma de 4 obtenidos.</li>
+                                                <li>5: se coloca el número que dé la suma de 5 obtenidos.</li>
+                                                <li>6: se coloca el número que dé la suma de 6 obtenidos.</li>
+                                                <li>Escalera: 25 puntos si es servida, 20 si fue armada. Se forma con una progresión de números. Hay dos posibilidades: 
+                                                    <ol>
+                                                        <li>1-2-3-4-5 (escalera menor)</li>
+                                                        <li>2-3-4-5-6 (escalera mayor).</li>
+                                                    </ol>
+                                                </li>
+                                                <li>Full: 35 puntos si es servido o 30 puntos si es armado. Se forma con dos grupos de dados iguales, uno de tres y otro de dos dados.</li>
+                                                <li>Póker: 45 puntos si es servido o 40 puntos si es armado. Se forma con cuatro dados iguales.</li>
+                                                <li>Generala: 50 puntos si se logra formar cinco números iguales en dos o tres tiros. Si se logra generala servida se ganará el juego.</li>
+                                                <li>Generala Doble: 60 puntos si se logra formar dos generalas.</li>               
+                                            </ul>
+                                        </div>
+                                        </div>
+                                        </div>  
+                         </div> 
+
+
+                         <div class="popup popup-instruct">
+                                
+                                <div class="page-content hide-navbar-on-scrol">
+
+               <!-- Top Navbar -->
+               <div class="navbar color-black">
+                    <div class="navbar-inner sliding">
+                      <div class="left">
+                        <a class="link back popup-close" href="#">
+                          <i class="icon icon-back"></i>
+                        </a>
+                      </div>
+                      <div class="title">Uso del Anotador</div>
+                    </div>
+                  </div>
+
+                                    <div class="row">
+                                        <div>
+                                        <p class="col-70 auto justif">
+                                        Al iniciar la aplicación te encontrarás con la opción de agregar un jugador (pudiendo hacerlo tantas veces como quieras) 
+                                        o iniciar el anotador. <br>
+
+                                        Por favor, coloca los nombres de los participantes en el casillero correspondiente. 
+                                        <br>Si por error colocaste un participante extra, podes deslizar ese casillero hacia la izquierda y tendrás la opción de eliminar
+                                        dicho participante.
+                                        Una vez agregados los participantes (con o sin nombre, "jugador 1, jugador 2, etc") procedé a iniciar la applicación. <br>
+                                        Allí te encontraras con:
+                                        <div class="col-70 auto">
+                                        <ul class="justif">
+                                            <li>
+                                                Barra lateral izquierda : Nombres técnicos de los puntajes
+                                            </li>
+                                            <li>
+                                                Lateral derecho: Slider con puntajes, cruces o barras. 
+                                                <br> La cruz será utilizada cuando se "tachará" el casillero, y por el contrario cuando todavia este utilizable el mismo
+                                                dejaremos la barra horizontal.
+                                                <br>
+                                                Cada jugador tendrá su propia pantalla, para poder ir recorriendo las mismas solo debes deslizar hacia la derecha.
+                                            </li>
+                                            <li>
+                                                Pie de app : En el mismo veras 2 botones 
+                                                <ol>
+                                                    <li>Terminar: finalizará el juego y volverá al inicio de la aplicación</li>
+                                                    <li>Slider: allí veras los puntajjes generales del juego, además al hacer click podras ver una tabla general</li>
+                                                    
+                                                </ol>
+                                            </li>
+                                        </ul> 
+                                    </div>          
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>  
+                     </div> 
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+</body>
+
+</html>
