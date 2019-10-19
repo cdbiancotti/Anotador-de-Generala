@@ -38,9 +38,9 @@ var mainView = app.views.create('.view-main');
 // RESET ALL
 
 function resetGame(){
-  jugadores = [];
-  totales = [];
-  totalesGral = [];
+  players = [];
+  totalScores = [];
+  GeneralScores = [];
   $$("li.swipeout").remove();
 }
 
@@ -61,13 +61,13 @@ function onBackKeyDown() {
   }  
 };
     
-// VARIABLES GLOBALES
-
+// Global variables
 var scoreName = ['Nombre', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Escalera', 'Full', 'Póker', 'Generala', 'D.Generala', 'Total'];
-var jugadores = [];
-var totales = [];
-var totalesGral = [];
+var players = [];
+var totalScores = [];
+var GeneralScores = [];
 var indexJugador, indexPicker;
+
 const closeAndReset = () => {
   mainView.router.back()
   resetGame();
@@ -123,9 +123,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function() {
         jugador = $$(estaoNo[i]).hasClass("input-with-value")?estaoNo[i].value:$$("li.primeros")[i].innerText;
         var hasSpace = jugador.indexOf('\n');
         if( hasSpace > 0 ) jugador = jugador.substring(hasSpace, -1);
-        jugadores.push(jugador);
-        totales.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-        totalesGral.push(0);
+        players.push(jugador);
+        totalScores.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+        GeneralScores.push(0);
       };    
   });
 });
@@ -140,18 +140,18 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
     };
   };
   
-  // for slider jugadores
+  // for slider players
   function createSliders(){
-    for(var i = 0; i < jugadores.length; i++){
-      var jugComprimido = jugadores[i].replace(' ','') + i;
+    for(var i = 0; i < players.length; i++){
+      var jugComprimido = players[i].replace(' ','') + i;
       $$(".swiper-wrapper.otroSwiper").append(`<div class="swiper-slide playerFill h100">
                                                   <div class="list no-hairlines-md h100">
                                                     <ul class="${jugComprimido} page3 h100">
-                                                      <li class="h7 ali">${jugadores[i]}</li>
+                                                      <li class="h7 ali">${players[i]}</li>
                                                     </ul>
                                                   </div>
                                                 </div>`);
-      $$(".swiper-wrapper.scores").append(`<div class="swiper-slide">${jugadores[i]}: <span class="valorTotal"></span></div>`);
+      $$(".swiper-wrapper.scores").append(`<div class="swiper-slide">${players[i]}: <span class="valorTotal"></span></div>`);
       createScore(jugComprimido);
       $$(`ul.${jugComprimido}`).append(`<li class="h7 ali"><span class="valorTotal"></span></li>`);
     };
@@ -181,22 +181,23 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
         toolbarCloseText: 'Confirmar',
         cols: [{
                 textAlign: 'center',
-                values: ['-', uno, dos, tres, cuatro, cinco, 'X']
+                values: [0, uno, dos, tres, cuatro, cinco, 0],
+                displayValues: ['-', uno, dos, tres, cuatro, cinco, 'x']
               }],
         on: {
           closed: function () {
-            totales[indexJugador][indexPicker] = parseInt(this.value);
-            console.log(totales[indexJugador]);
-            totalesGral[indexJugador] = totales[indexJugador].reduce((a, b) => a + b);
-            $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
-            $$('div>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
+            totalScores[indexJugador][indexPicker] = parseInt(this.value);
+            console.log(totalScores[indexJugador]);
+            GeneralScores[indexJugador] = totalScores[indexJugador].reduce((a, b) => a + b);
+            $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
+            $$('div>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
           }
         }
       });
     };
     for(var j = 7; j < 12; j++){
       serve = unserve + 5;
-      var juegosArmados = ['-', unserve, serve, 'X'];
+      var juegosArmados = [0, unserve, serve, 0];
       $$(`ul.${jug}`).append(`<li class="h7 segundos">
                                 <input type="text" placeholder=" - " readonly="readonly" class='juegos${jug + j} ali'/>
                               </li>`);
@@ -211,14 +212,15 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
         cols: [{
                 textAlign: 'center',
                 values: juegosArmados,
+                displayValues : ['-'].concat(juegosArmados.slice(1,3)).concat(['x']) 
               }],
         on: {
           closed: function () {
-            totales[indexJugador][indexPicker] = parseInt(this.value);
-            console.log(totales[indexJugador]);
-            totalesGral[indexJugador] = totales[indexJugador].reduce((a, b) => a + b);
-            $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
-            $$('div>span.valorTotal')[indexJugador].innerText = `${totalesGral[indexJugador]}`;
+            totalScores[indexJugador][indexPicker] = parseInt(this.value);
+            console.log(totalScores[indexJugador]);
+            GeneralScores[indexJugador] = totalScores[indexJugador].reduce((a, b) => a + b);
+            $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
+            $$('div>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
 
           }
         }
@@ -237,8 +239,8 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   // TABLA DE PUNTOS
   $$('.popup-open.moverse').on('click', function () {
     var points = '';
-    for(var i = 0; i < jugadores.length; i++){
-      points += jugadores[i] + ':   ' + totalesGral[i] + '<br/>';
+    for(var i = 0; i < players.length; i++){
+      points += players[i] + ':   ' + GeneralScores[i] + '<br/>';
     };
     $$('.rellenarPuntajes').append(points);
   });
@@ -249,11 +251,11 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
   
 
   $$('.open-confirm').on('click', function () {
-      var algunIndex = totalesGral.indexOf(Math.max(...totalesGral));
+      var algunIndex = GeneralScores.indexOf(Math.max(...GeneralScores));
       var jugadorazo = $$('ul.page3>li')[algunIndex].innerText;
       app.dialog.confirm('Quieren jugar a revancha?', `Gano ${jugadorazo}`, function () {
-        for(var i = 0; i < totales.length; i++){
-          totales[i]=0;
+        for(var i = 0; i < totalScores.length; i++){
+          totalScores[i]=0;
         };
         createScore();
       }, function(){
