@@ -38,10 +38,7 @@ var mainView = app.views.create('.view-main');
 // RESET ALL
 
 function resetGame(){
-  players = [];
-  totalScores = [];
-  GeneralScores = [];
-  $$("li.swipeout").remove();
+  // che caballo no se como resetearlo
 }
 
 // BOTON PARA VOLVER O SALIR
