@@ -181,13 +181,6 @@ $$(document).on('page:init', '.page[data-name="about"]', function (e) {
         inputEl: `.puntos${jug + j}`,
         toolbarCloseText: 'Confirmar',
         openIn: 'popover',
-        onChange: function () {
-          totalScores[indexJugador][indexPicker] = parseInt(this.value);
-          console.log(totalScores[indexJugador]);
-          GeneralScores[indexJugador] = totalScores[indexJugador].reduce((a, b) => a + b);
-          $$('ul.page3>li>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
-          $$('div>span.valorTotal')[indexJugador].innerText = `${GeneralScores[indexJugador]}`;
-        },
         cols: [{
                 textAlign: 'center',
                 values: [0, uno, dos, tres, cuatro, cinco, 0],
