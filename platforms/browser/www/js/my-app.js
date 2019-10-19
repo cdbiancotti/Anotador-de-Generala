@@ -50,39 +50,13 @@ document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown() { 
   switch (app.views.main.router.url) {
     case ( "/about/" ) :
-        navigator.notification.confirm(
-          'Deseas continuar',           
-          onConfirm,            
-          'SE REINICIARA EL MARCADOR!!!', 
-          ['Si','No']     
-        );
-        function onConfirm(buttonIndex) {
-            if (buttonIndex == 1) {
-              resetGame();
-              mainView.router.back();
-            }
-            else {}
-          };
+      dynamicDialog(' Esta acción reiniciara todos los puntajes ¿Deseas Continuar?', 'REINICIANDO MARCADOR', closeAndReset);
         break;
     case ( "/inicio/" ) :
         mainView.router.back();
         break;
     default :
-    {
-      navigator.notification.confirm(
-        '¡¿Estás seguro que vas a salir de la app?!', 
-         onConfirm,            
-        'Confirmar salida',           
-        ['Si','No']     
-      );
-      function onConfirm(buttonIndex) {
-          if (buttonIndex == 1) {
-              navigator.app.exitApp();
-          }
-          else {}
-      
-      }
-    }
+    dynamicDialog('¿Estás seguro que quieres salir de la app?', 'Confirmar salida', navigator.app.exitApp);  
   break;   
   }  
 };
@@ -94,6 +68,28 @@ var jugadores = [];
 var totales = [];
 var totalesGral = [];
 var indexJugador, indexPicker;
+const closeAndReset = () => {
+  mainView.router.back()
+  resetGame();
+}
+var dynamicDialog = (textBody, titleDial, callback) => {
+  app.dialog.create({
+    title: titleDial,
+    text: textBody,
+    buttons : [
+      {
+        text: 'Si',
+        onClick: callback
+        }, 
+      {
+        text: 'No',
+      }
+      
+    ]
+  }).open();
+};
+
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
